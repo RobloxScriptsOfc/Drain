@@ -1,0 +1,1461 @@
+-- This file was generated at discord.gg/syncrypt
+
+local t1 = {}
+local t2 = {}
+local v3 = unpack or table.unpack
+
+-- Compatibility/safety helpers. The original script assumed every map object
+-- existed immediately, which can abort the entire script before the UI loads.
+local function getChildrenOf(name)
+    local obj = workspace:FindFirstChild(name)
+    if not obj then return {} end
+    return obj:GetChildren()
+end
+
+local function findPath(root, ...)
+    local current = root
+    for i = 1, select("#", ...) do
+        if not current then return nil end
+        current = current:FindFirstChild(select(i, ...))
+    end
+    return current
+end
+
+local function safeCanCollide(part, value)
+    if part and part:IsA("BasePart") then
+        part.CanCollide = value
+    end
+end
+
+local selected_farm_cash = { "Dropped Cash" }
+t2.value1 = true
+task.spawn(function()
+    task.wait(5)
+    t2.value1 = false
+end)
+print("fixed dumpster esp")
+
+for _, child in pairs(getChildrenOf("ATMS")) do
+    t1.value1 = child:FindFirstChild("MainPart")
+    safeCanCollide(t1.value1, false)
+end
+function t2.value2(p1, p2, p3)
+    local v29 = if not p3 then {
+		Title = p1,
+		Text = p2,
+		Duration = 10
+	} else {
+		Title = p1,
+		Text = p2,
+		Duration = 10,
+		Button1 = p3
+	}
+
+    game:GetService("StarterGui"):SetCore("SendNotification", v29)
+end
+t2.value3 = false
+t2.value4 = game:GetService("Players")
+t2.value5 = t2.value4.LocalPlayer
+if not t2.value5 then
+    error("LocalPlayer is not available; run the script after entering the game")
+end
+t2.value6 = t2.value5.Character or t2.value5.CharacterAdded:Wait()
+t2.value7 = false
+t2.value8 = false
+t2.value9 = false
+t2.value10 = false
+t2.value11 = false
+local _ = workspace.CurrentCamera
+t2.value12 = t2.value5:GetMouse()
+local UserInputService = game:GetService("UserInputService")
+
+t2.value13 = game:GetService("RunService")
+
+local UserInputService2 = game:GetService("UserInputService")
+
+t2.value5.CharacterAdded:Connect(function(character)
+    t2.value6 = character
+end)
+task.spawn(function()
+    while wait(1.5) do
+        if t2.value3 then
+            local DroppedCash = workspace:FindFirstChild("DroppedCash")
+
+            if DroppedCash then
+                local ProximityPrompt = DroppedCash:FindFirstChild("ProximityPrompt")
+
+                if ProximityPrompt then
+                    DroppedCash.CFrame = t2.value6.HumanoidRootPart.CFrame
+                    task.wait(0.13)
+                    fireproximityprompt(ProximityPrompt)
+                end
+            end
+        end
+    end
+end)
+
+local TouchEnabled = UserInputService2.TouchEnabled
+if TouchEnabled then
+    TouchEnabled = not UserInputService2.KeyboardEnabled and not UserInputService2.MouseEnabled
+end
+t2.value14 = TouchEnabled
+if t2.value14 then
+    t2.value2("Device Detected", "We detected you as mobile, mobile is now supported!")
+end
+if not t2.value14 then
+    t2.value2("Device Detected", "We detected you as PC, PC is always supported")
+end
+t2.value5.DevCameraOcclusionMode = Enum.DevCameraOcclusionMode.Invisicam
+for _, descendant in pairs(workspace:GetDescendants()) do
+    t1.value2 = descendant:IsA("ProximityPrompt")
+
+    if t1.value2 then
+        descendant.RequiresLineOfSight = false
+    end
+end
+local RunService = game:GetService("RunService")
+
+function t1.value2()
+    for _, child in pairs(getChildrenOf("ATMS")) do
+        if not table.find(selected_farm_cash, "ATMs") or not t2.value3 then
+            return
+        end
+
+        local MainPart = child:FindFirstChild("MainPart")
+        local v48 = MainPart
+        local ProximityPrompt = MainPart and MainPart:FindFirstChild("ProximityPrompt")
+
+        if MainPart then
+            v48 = ProximityPrompt and ProximityPrompt.Enabled == true
+        end
+
+        if v48 then
+            t2.value6.HumanoidRootPart.CFrame = MainPart.CFrame * CFrame.Angles(-1.5707963267948966, 0, 0)
+            task.wait(0.13)
+            fireproximityprompt(ProximityPrompt)
+        end
+    end
+end
+t2.value15 = RunService
+t2.value16 = false
+function t2.value17(p4)
+    if p4 == true then
+        t2.value7 = true
+        t2.value6.Humanoid.PlatformStand = true
+        t2.value6.HumanoidRootPart.CFrame = CFrame.new(t2.value6.HumanoidRootPart.Position) * CFrame.Angles(1.5707963267948966, 0, 0)
+
+        while t2.value7 do
+            if not t2.value7 then
+                t2.value6.Humanoid.PlatformStand = false
+
+                return
+            end
+
+            local Dumpsters = workspace:FindFirstChild("Dumpsters")
+            if Dumpsters and Dumpsters:FindFirstChild("SearchableDumpster") then
+                for _, child in pairs(Dumpsters:GetChildren()) do
+                    local MainPart = child:FindFirstChild("MainPart")
+
+                    if not MainPart then
+                        continue
+                    end
+
+                    local ProximityPrompt = MainPart:FindFirstChild("ProximityPrompt")
+
+                    if not ProximityPrompt or ProximityPrompt.Enabled ~= true then
+                        continue
+                    end
+
+                    local LootPart = child:FindFirstChild("LootPart")
+
+                    if not LootPart then
+                        continue
+                    end
+
+                    local ProximityPrompt2 = LootPart.Attachment:FindFirstChild("ProximityPrompt")
+
+                    if not (ProximityPrompt2 and t2.value7 == true) then
+                        break
+                    end
+
+                    if not t2.value7 then
+                        t2.value6.Humanoid.PlatformStand = false
+
+                        break
+                    end
+
+                    ProximityPrompt.RequiresLineOfSight = false
+                    ProximityPrompt2.RequiresLineOfSight = false
+                    t2.value6.HumanoidRootPart.CFrame = LootPart.CFrame * CFrame.Angles(1.5707963267948966, 0, 0)
+                    task.wait(0.1)
+                    fireproximityprompt(ProximityPrompt)
+                    task.wait(0.3)
+                    fireproximityprompt(ProximityPrompt2)
+                    task.wait(0.1)
+                end
+            end
+
+            task.wait(3)
+        end
+    else
+        t2.value6.Humanoid.PlatformStand = false
+        t2.value6.HumanoidRootPart.CFrame = CFrame.new(t2.value6.HumanoidRootPart.Position) * CFrame.Angles(-1.5707963267948966, 0, 0)
+    end
+end
+t2.value18 = t1.value2
+function t2.value19()
+    for _, child in pairs(getChildrenOf("MoneySpawns")) do
+        if not table.find(selected_farm_cash, "Dropped Cash") or not t2.value3 then
+            return
+        end
+
+        local DroppedCash = child:FindFirstChild("DroppedCash")
+
+        if DroppedCash and DroppedCash.Transparency == 0 then
+            local ProximityPrompt = DroppedCash:FindFirstChild("ProximityPrompt")
+
+            if ProximityPrompt and ProximityPrompt.Enabled == true then
+                t2.value6.HumanoidRootPart.CFrame = DroppedCash.CFrame * CFrame.Angles(1.5707963267948966, 0, 0)
+                task.wait(0.15)
+                fireproximityprompt(ProximityPrompt)
+            end
+        end
+    end
+end
+function t2.value20(p5)
+    if p5 == true then
+        t2.value3 = true
+        t2.value6.Humanoid.PlatformStand = true
+        t2.value6.HumanoidRootPart.CFrame = CFrame.new(t2.value6.HumanoidRootPart.Position) * CFrame.Angles(1.5707963267948966, 0, 0)
+
+        while t2.value3 == true do
+            if table.find(selected_farm_cash, "Dropped Cash") then
+                t2.value19()
+            end
+
+            if table.find(selected_farm_cash, "ATMs") then
+                t2.value18()
+            end
+
+            task.wait(1.5)
+        end
+    elseif p5 == false then
+        t2.value6.Humanoid.PlatformStand = false
+        t2.value6.HumanoidRootPart.CFrame = CFrame.new(t2.value6.HumanoidRootPart.Position) * CFrame.Angles(-1.5707963267948966, 0, 0)
+    end
+end
+t2.value21 = false
+t2.value22 = nil
+t2.value22 = false
+function t2.value23(p6)
+    task.spawn(function()
+        if p6 == true then
+
+            for v123, v124 in pairs((findPath(workspace, "WholeMap", "MAP_Floor", "Model", "Model", "Model", "Model", "Model", "Model", "Model") and findPath(workspace, "WholeMap", "MAP_Floor", "Model", "Model", "Model", "Model", "Model", "Model", "Model"):GetChildren() or {})) do
+
+                if v124:IsA("BasePart") then
+                    v124.CanCollide = false
+                end
+            end
+            local RemoteFunction = findPath(workspace, "Jobs", "Construction", "ConstructionNPC", "RemoteFunction")
+            if not RemoteFunction then
+                t2.value22 = false
+                t2.value2("Construction Job", "Construction RemoteFunction was not found in this server.")
+                return
+            end
+            t2.value22 = true
+            while t2.value22 do
+                local t3 = { "StartJob" }
+                pcall(function()
+                    local v226 = RemoteFunction
+                    local t4 = { unpack(t3) }
+
+                    v226:InvokeServer(v3(t4))
+                end)
+                if not t2.value22 then
+                    return
+                end
+                t2.value6.HumanoidRootPart.CFrame = CFrame.new(151, 125, -378)
+                task.wait(0.2)
+                local t5 = { "GrabPlank" }
+                pcall(function()
+                    RemoteFunction:InvokeServer(unpack(t5))
+                end)
+                task.wait(0.1)
+                t2.value6.HumanoidRootPart.CFrame = CFrame.new(212, 125, -434)
+                local wait2 = task.wait
+                wait2(0.15)
+                local t6 = { "DeliverPlanks" }
+                pcall(function()
+                    local v228 = RemoteFunction
+                    local t7 = { unpack(t6) }
+
+                    v228:InvokeServer(v3(t7))
+                end)
+                task.wait(0.1)
+            end
+        else
+            t2.value22 = false
+
+            for _, child in pairs((findPath(workspace, "WholeMap", "MAP_Floor", "Model", "Model", "Model", "Model", "Model", "Model", "Model") and findPath(workspace, "WholeMap", "MAP_Floor", "Model", "Model", "Model", "Model", "Model", "Model", "Model"):GetChildren() or {})) do
+                if child:IsA("BasePart") then
+                    child.CanCollide = true
+                end
+            end
+
+            for _ = 1, 5 do
+                t2.value6.HumanoidRootPart.CFrame = CFrame.new(150, 189, -304)
+                task.wait(0.1)
+            end
+        end
+    end)
+end
+function t2.value24(p7)
+    task.spawn(function()
+        if p7 == false then
+            t2.value9 = false
+        else
+            t2.value9 = true
+        end
+        for v135, v136 in pairs(getChildrenOf("DroppedItems")) do
+
+            if p7 == true then
+                if v136:FindFirstChild("Handle") then
+                    for _, child in pairs(v136:GetChildren()) do
+                        if child:IsA("Highlight") then
+                            child:Destroy()
+                        end
+                    end
+
+                    local Highlight = Instance.new("Highlight")
+
+                    Highlight.Adornee = v136
+                    Highlight.FillColor = Color3.fromRGB(255, 255, 0)
+                    Highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+                    Highlight.FillTransparency = 0.3
+                    Highlight.OutlineTransparency = 1
+                    Highlight.Parent = v136
+                end
+            else
+                hld = v136:FindFirstChild("Highlight")
+
+                if hld then
+                    hld:Destroy()
+                end
+            end
+        end
+        for _, child in pairs(getChildrenOf("LootSpawns")) do
+            if p7 == true then
+                local Highlight = Instance.new("Highlight")
+
+                Highlight.Adornee = child
+                Highlight.FillColor = Color3.fromRGB(255, 255, 0)
+                Highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+                Highlight.FillTransparency = 0.3
+                Highlight.OutlineTransparency = 1
+                Highlight.Parent = child
+            else
+                hld = child:FindFirstChild("Highlight")
+
+                if hld then
+                    hld:Destroy()
+                end
+            end
+        end
+        do
+            local DroppedItems = workspace:FindFirstChild("DroppedItems")
+            if not DroppedItems then return end
+            DroppedItems.ChildAdded:Connect(function(child)
+            if t2.value9 == true then
+                for _, child2 in pairs(child:GetChildren()) do
+                    if child2:IsA("Highlight") then
+                        child2:Destroy()
+                    end
+                end
+
+                task.wait(0.3)
+
+                local Highlight = Instance.new("Highlight")
+
+                Highlight.Adornee = child
+                Highlight.FillColor = Color3.fromRGB(255, 255, 0)
+                Highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+                Highlight.FillTransparency = 0.3
+                Highlight.OutlineTransparency = 1
+                Highlight.Parent = child
+            end
+            end)
+        end
+    end)
+end
+function t2.value25(p8)
+    task.spawn(function()
+        if p8 == true then
+            t2.value10 = true
+        else
+            t2.value10 = false
+        end
+
+        for _, child in pairs(getChildrenOf("Dumpsters")) do
+            local v145 = child
+
+            if p8 == true then
+                if v145:IsA("Model") then
+                    print("true")
+
+                    if v145.MainPart.ProximityPrompt.Enabled == true then
+                        for _, child3 in pairs(v145:GetChildren()) do
+                            if child3:IsA("Highlight") then
+                                child3:Destroy()
+                            end
+                        end
+
+                        print("make the fucking highlight bitch")
+
+                        local Highlight = Instance.new("Highlight")
+
+                        Highlight.Adornee = v145
+                        Highlight.FillColor = Color3.fromRGB(255, 0, 255)
+                        Highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+                        Highlight.FillTransparency = 0.3
+                        Highlight.OutlineTransparency = 1
+                        Highlight.Parent = v145
+                    end
+
+                    v145.MainPart.ProximityPrompt.Changed:Connect(function()
+                        if v145.MainPart.ProximityPrompt.Enabled == true and t2.value10 == true then
+                            for _, child4 in pairs(v145:GetChildren()) do
+                                if child4:IsA("Highlight") then
+                                    child4:Destroy()
+                                end
+                            end
+
+                            local Highlight = Instance.new("Highlight")
+
+                            Highlight.Adornee = v145.MainPart
+                            Highlight.FillColor = Color3.fromRGB(255, 0, 255)
+                            Highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+                            Highlight.FillTransparency = 0.3
+                            Highlight.OutlineTransparency = 1
+                            Highlight.Parent = v145
+
+                            return
+                        end
+
+                        for _, child5 in pairs(v145:GetChildren()) do
+                            if child5:IsA("Highlight") then
+                                child5:Destroy()
+                            end
+                        end
+                    end)
+                end
+            else
+                for _, child6 in pairs(v145:GetChildren()) do
+                    if child6:IsA("Highlight") then
+                        child6:Destroy()
+                    end
+                end
+            end
+        end
+    end)
+end
+function t2.value26(p9)
+    if p9 == false then
+        t2.value8 = false
+    else
+        t2.value8 = true
+    end
+
+    task.spawn(function()
+        for _, child in pairs(getChildrenOf("MoneySpawns")) do
+            if p9 == true then
+                local GetChildren = child.GetChildren
+
+                for _, v in pairs(GetChildren(child)) do
+                    if v:IsA("Highlight") then
+                        v:Destroy()
+                    end
+                end
+
+                local Highlight = Instance.new("Highlight")
+
+                Highlight.Adornee = child
+                Highlight.FillColor = Color3.fromRGB(0, 255, 0)
+                Highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+                Highlight.FillTransparency = 0.3
+                Highlight.OutlineTransparency = 1
+                Highlight.Parent = child
+            else
+                for _, child7 in pairs(child:GetChildren()) do
+                    if child7:IsA("Highlight") then
+                        child7:Destroy()
+                    end
+                end
+            end
+        end
+
+        workspace.ChildAdded:Connect(function(child)
+            if t2.value8 == true and child.Name == "DroppedCash" then
+                for _, child8 in pairs(child:GetChildren()) do
+                    if child8:IsA("Highlight") then
+                        child8:Destroy()
+                    end
+                end
+
+                local Highlight = Instance.new("Highlight")
+
+                Highlight.Adornee = child
+                Highlight.FillColor = Color3.fromRGB(0, 255, 0)
+                Highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+                Highlight.FillTransparency = 0.3
+                Highlight.OutlineTransparency = 1
+                Highlight.Parent = child
+            end
+        end)
+    end)
+end
+function t2.value27(p10)
+    task.spawn(function()
+        if p10 == true then
+            t2.value11 = true
+        else
+            t2.value11 = false
+        end
+
+        for _, child in pairs(getChildrenOf("ATMS")) do
+            local v116 = child
+            local v117 = p10 == true
+
+            if v117 then
+                v117 = v116.MainPart.ProximityPrompt.Enabled == true
+            end
+
+            if v117 then
+                for _, child9 in pairs(v116:GetChildren()) do
+                    if child9:IsA("Highlight") then
+                        child9:Destroy()
+                    end
+                end
+
+                local Highlight = Instance.new("Highlight")
+
+                Highlight.Adornee = v116
+                Highlight.FillColor = Color3.fromRGB(0, 100, 255)
+                Highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+                Highlight.FillTransparency = 0.3
+                Highlight.OutlineTransparency = 1
+                Highlight.Parent = v116
+            elseif p10 == false then
+                hld = v116:FindFirstChild("Highlight")
+
+                if hld then
+                    hld:Destroy()
+                end
+            end
+
+            local atmPart = v116:FindFirstChild("MainPart")
+            local atmPrompt = atmPart and atmPart:FindFirstChild("ProximityPrompt")
+            if not atmPrompt then
+                continue
+            end
+            atmPrompt.Changed:Connect(function()
+                if atmPrompt.Enabled == false then
+                    for _, child10 in pairs(v116:GetChildren()) do
+                        if child10:IsA("Highlight") then
+                            child10:Destroy()
+                        end
+                    end
+
+                    return
+                end
+
+                if atmPrompt.Enabled == true and t2.value11 == true then
+                    for _, child11 in pairs(v116:GetChildren()) do
+                        if child11:IsA("Highlight") then
+                            child11:Destroy()
+                        end
+                    end
+
+                    local Highlight = Instance.new("Highlight")
+
+                    Highlight.Adornee = v116
+                    Highlight.FillColor = Color3.fromRGB(0, 100, 255)
+                    Highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+                    Highlight.FillTransparency = 0.3
+                    Highlight.OutlineTransparency = 1
+                    Highlight.Parent = v116
+                end
+            end)
+        end
+    end)
+end
+t2.value28 = false
+local ScreenGui = Instance.new("ScreenGui")
+
+t2.value29 = Instance.new("TextButton")
+
+local UICorner = Instance.new("UICorner")
+
+ScreenGui.Parent = game:GetService("CoreGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+t2.value29.Parent = ScreenGui
+t2.value29.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+t2.value29.BorderColor3 = Color3.fromRGB(0, 0, 0)
+t2.value29.BorderSizePixel = 0
+t2.value29.Position = UDim2.new(0.634430707, 0, 0.517832696, 0)
+t2.value29.Size = UDim2.new(0.115740739, 0, 0.118312754, 0)
+t2.value29.Font = Enum.Font.Nunito
+t2.value29.Text = "Rapid Fire"
+t2.value29.TextColor3 = Color3.fromRGB(0, 0, 0)
+t2.value29.TextScaled = true
+t2.value29.TextSize = 14
+t2.value29.TextWrapped = true
+t2.value29.Visible = false
+UICorner.CornerRadius = UDim.new(0, 20)
+UICorner.Parent = t2.value29
+t2.value30 = Instance.new("ImageLabel")
+t2.value30.Name = "crosshair"
+t2.value30.Parent = ScreenGui
+t2.value30.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+t2.value30.BackgroundTransparency = 1
+t2.value30.BorderColor3 = Color3.fromRGB(0, 0, 0)
+t2.value30.BorderSizePixel = 0
+t2.value30.Position = UDim2.fromScale(0.5, 0.5)
+t2.value30.Size = UDim2.fromOffset(100, 100)
+t2.value30.AnchorPoint = Vector2.new(0.5, 0.5)
+t2.value30.Image = "rbxassetid://4463666435"
+t2.value30.Visible = false
+t2.value31 = workspace.CurrentCamera
+t2.value32 = nil
+t2.value33 = nil
+t2.value34 = false
+t2.value35 = nil
+t2.value36 = nil
+t2.value37 = {}
+t2.value33 = nil
+local function v15(p11)
+    if p11 == false then
+        t2.value33 = nil
+        t2.value34 = false
+        if t2.value35 then
+            t2.value35:Disconnect()
+        end
+        if t2.value36 then
+            t2.value36:Disconnect()
+        end
+        for k, v in pairs(t2.value37) do
+            v:Disconnect()
+            t2.value37[k] = nil
+        end
+        for v78, v79 in ipairs(t2.value4:GetPlayers()) do
+
+            if v79 ~= t2.value5 and v79.Character then
+                local Highlight = v79.Character:FindFirstChildOfClass("Highlight")
+
+                if Highlight then
+                    Highlight:Destroy()
+                end
+            end
+        end
+        if t2.value32 then
+            local Highlight = t2.value32.Parent:FindFirstChildOfClass("Highlight")
+
+            if Highlight then
+                Highlight.FillColor = Color3.fromRGB(255, 0, 0)
+            end
+
+            t2.value32 = nil
+        end
+
+        return
+    end
+
+    if p11 == true then
+        t2.value34 = true
+
+        for _, player in ipairs(t2.value4:GetPlayers()) do
+            if player ~= t2.value5 then
+                if player.Character and not player.Character:FindFirstChildOfClass("Highlight") then
+                    local Highlight = Instance.new("Highlight")
+
+                    Highlight.Adornee = player.Character
+                    Highlight.FillTransparency = 0.3
+                    Highlight.OutlineTransparency = 1
+                    Highlight.FillColor = Color3.fromRGB(255, 0, 0)
+                    Highlight.Parent = player.Character
+                end
+
+                t2.value37[player] = player.CharacterAdded:Connect(function(character)
+                    character:WaitForChild("HumanoidRootPart")
+
+                    local Highlight = Instance.new("Highlight")
+
+                    Highlight.Adornee = character
+                    Highlight.FillTransparency = 0.3
+                    Highlight.OutlineTransparency = 1
+                    Highlight.FillColor = Color3.fromRGB(255, 0, 0)
+                    Highlight.Parent = character
+                end)
+            end
+        end
+
+        t2.value4.PlayerAdded:Connect(function(player)
+            if player == t2.value5 then
+                return
+            end
+
+            t2.value37[player] = player.CharacterAdded:Connect(function(character)
+                character:WaitForChild("HumanoidRootPart")
+
+                local Highlight = Instance.new("Highlight")
+
+                Highlight.Adornee = character
+                Highlight.FillTransparency = 0.3
+                Highlight.OutlineTransparency = 1
+                Highlight.FillColor = Color3.fromRGB(255, 0, 0)
+                Highlight.Parent = character
+            end)
+        end)
+        t2.value13.RenderStepped:Connect(function()
+            if not t2.value34 then
+                return
+            end
+            local v172 = t2.value31:ScreenPointToRay(t2.value12.X, t2.value12.Y)
+            local Origin = v172.Origin
+            local Direction = v172.Direction
+            local v175
+            local huge = math.huge
+            for v179, v180 in ipairs(t2.value4:GetPlayers()) do
+
+                if v180 ~= t2.value5 and v180.Character then
+                    local HumanoidRootPart = v180.Character:FindFirstChild("HumanoidRootPart")
+
+                    if HumanoidRootPart and (HumanoidRootPart.Position - t2.value31.CFrame.Position):Dot(t2.value31.CFrame.LookVector) > 0 then
+                        local Magnitude = (Origin + Direction * (HumanoidRootPart.Position - Origin):Dot(Direction) - HumanoidRootPart.Position).Magnitude
+
+                        if Magnitude < huge then
+                            v175 = HumanoidRootPart
+                            huge = Magnitude
+                        end
+                    end
+                end
+            end
+            if t2.value32 and v175 ~= t2.value32 then
+                local Highlight = t2.value32.Parent:FindFirstChildOfClass("Highlight")
+
+                if Highlight then
+                    Highlight.FillColor = Color3.fromRGB(255, 0, 0)
+                end
+            end
+            if v175 then
+                local Highlight = v175.Parent:FindFirstChildOfClass("Highlight")
+
+                if Highlight then
+                    Highlight.FillColor = Color3.fromRGB(0, 255, 0)
+                end
+            end
+            t2.value32 = v175
+            if v175 then
+                v175 = v175.Parent
+            end
+            if v175 then
+                if t2.value32.Parent:FindFirstChild("Humanoid") then
+                    t2.value33 = t2.value4:GetPlayerFromCharacter(t2.value32.Parent)
+
+                    return
+                end
+            else
+                t2.value33 = nil
+            end
+        end)
+    end
+end
+function t2.value38(p12)
+    local v60 = t2.value31.ViewportSize.X * 0.5
+    local v61 = t2.value31.ViewportSize.Y * 0.5
+
+    if p12 == false then
+        t2.value29.Visible = false
+        t2.value30.Visible = false
+        t2.value33 = nil
+        t2.value34 = false
+        if t2.value35 then
+            t2.value35:Disconnect()
+            t2.value35 = nil
+        end
+        if t2.value36 then
+            t2.value36:Disconnect()
+            t2.value36 = nil
+        end
+        for k, v in pairs(t2.value37) do
+            v:Disconnect()
+            t2.value37[k] = nil
+        end
+        for v66, v67 in ipairs(t2.value4:GetPlayers()) do
+
+            if v67 ~= t2.value5 and v67.Character then
+                local Highlight = v67.Character:FindFirstChildOfClass("Highlight")
+
+                if Highlight then
+                    Highlight:Destroy()
+                end
+            end
+        end
+        if t2.value32 then
+            local Highlight = t2.value32.Parent:FindFirstChildOfClass("Highlight")
+
+            if Highlight then
+                Highlight.FillColor = Color3.fromRGB(255, 0, 0)
+            end
+
+            t2.value32 = nil
+        end
+
+        return
+    end
+
+    if p12 == true then
+        t2.value34 = true
+        t2.value29.Visible = true
+        t2.value30.Visible = true
+
+        for _, player in ipairs(t2.value4:GetPlayers()) do
+            if player ~= t2.value5 then
+                if player.Character and not player.Character:FindFirstChildOfClass("Highlight") then
+                    local Highlight = Instance.new("Highlight")
+
+                    Highlight.Adornee = player.Character
+                    Highlight.FillTransparency = 0.3
+                    Highlight.OutlineTransparency = 1
+                    Highlight.FillColor = Color3.fromRGB(255, 0, 0)
+                    Highlight.Parent = player.Character
+                end
+
+                t2.value37[player] = player.CharacterAdded:Connect(function(character)
+                    character:WaitForChild("HumanoidRootPart")
+
+                    local Highlight = Instance.new("Highlight")
+
+                    Highlight.Adornee = character
+                    Highlight.FillTransparency = 0.3
+                    Highlight.OutlineTransparency = 1
+                    Highlight.FillColor = Color3.fromRGB(255, 0, 0)
+                    Highlight.Parent = character
+                end)
+            end
+        end
+
+        t2.value36 = t2.value4.PlayerAdded:Connect(function(player)
+            if player == t2.value5 then
+                return
+            end
+
+            t2.value37[player] = player.CharacterAdded:Connect(function(character)
+                character:WaitForChild("HumanoidRootPart")
+
+                local Highlight = Instance.new("Highlight")
+
+                Highlight.Adornee = character
+                Highlight.FillTransparency = 0.3
+                Highlight.OutlineTransparency = 1
+                Highlight.FillColor = Color3.fromRGB(255, 0, 0)
+                Highlight.Parent = character
+            end)
+        end)
+        t2.value35 = t2.value13.RenderStepped:Connect(function()
+            if not t2.value34 then
+                return
+            end
+            local v156 = t2.value31:ScreenPointToRay(v60, v61)
+            local Origin = v156.Origin
+            local Direction = v156.Direction
+            local v159
+            local huge = math.huge
+            for v163, v164 in ipairs(t2.value4:GetPlayers()) do
+
+                if v164 ~= t2.value5 and v164.Character then
+                    local HumanoidRootPart = v164.Character:FindFirstChild("HumanoidRootPart")
+
+                    if HumanoidRootPart and (HumanoidRootPart.Position - t2.value31.CFrame.Position):Dot(t2.value31.CFrame.LookVector) > 0 then
+                        local Magnitude = (Origin + Direction * (HumanoidRootPart.Position - Origin):Dot(Direction) - HumanoidRootPart.Position).Magnitude
+
+                        if Magnitude < huge then
+                            huge = Magnitude
+                            v159 = HumanoidRootPart
+                        end
+                    end
+                end
+            end
+            if t2.value32 and v159 ~= t2.value32 then
+                local Highlight = t2.value32.Parent:FindFirstChildOfClass("Highlight")
+
+                if Highlight then
+                    Highlight.FillColor = Color3.fromRGB(255, 0, 0)
+                end
+            end
+            if v159 then
+                local Highlight = v159.Parent:FindFirstChildOfClass("Highlight")
+
+                if Highlight then
+                    Highlight.FillColor = Color3.fromRGB(0, 255, 0)
+                end
+            end
+            t2.value32 = v159
+            if v159 and v159.Parent then
+                if t2.value32.Parent:FindFirstChild("Humanoid") then
+                    t2.value33 = t2.value4:GetPlayerFromCharacter(t2.value32.Parent)
+
+                    return
+                end
+            else
+                t2.value33 = nil
+            end
+        end)
+    end
+end
+function t2.value39(p13)
+    task.spawn(function()
+        local connection
+        local GeneralEvent = game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("GeneralEvent")
+        connection = t2.value13.RenderStepped:Connect(function()
+            if t2.value33 ~= nil and t2.value33 then
+                if t2.value28 == false then
+                    connection:Disconnect()
+                end
+
+                local vector3 = Vector3.new(514.4743041992188, 131.78610229492188, -320.84820556640625)
+                local v240 = p13
+                local Head = t2.value33.Character and t2.value33.Character:FindFirstChild("Head")
+                if not Head then return end
+                local t8 = {
+					"FireGun",
+					{
+						Position1 = vector3,
+						GunName = v240,
+						Hit1 = Head
+					}
+				}
+
+                GeneralEvent:FireServer(unpack(t8))
+            end
+        end)
+    end)
+end
+t2.value29.MouseButton1Down:Connect(function()
+    local Tool = t2.value6:FindFirstChildOfClass("Tool")
+
+    if Tool then
+        t2.value39(Tool.Name)
+
+        return
+    end
+
+    t2.value2("READ ME", "YOU HAVE TO HAVE A GUN EQUIP TO USE THIS", "ok ):<")
+end)
+t2.value29.MouseButton1Up:Connect(function()
+end)
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    local v88 = input.KeyCode == Enum.KeyCode.T
+
+    if v88 then
+        v88 = gameProcessed == false and t2.value33
+    end
+
+    if v88 then
+        local Tool = t2.value6:FindFirstChildOfClass("Tool")
+
+        if Tool then
+            t2.value39(Tool.Name)
+
+            return
+        end
+
+        t2.value2("READ ME", "YOU HAVE TO HAVE A GUN EQUIP TO USE THIS", "ok ):<")
+    end
+end)
+UserInputService.InputEnded:Connect(function(input)
+    if input.KeyCode ~= Enum.KeyCode.T then
+    end
+end)
+
+local WindUI_URL = "https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"
+local okWind, v16 = pcall(function()
+    return loadstring(game:HttpGet(WindUI_URL))()
+end)
+if not okWind or not v16 then
+    error("WindUI could not be loaded. Your executor may not support HttpGet/loadstring, or the remote library is unavailable. Error: " .. tostring(v16))
+end
+
+local okKey, keyData = pcall(function()
+    return game:HttpGet("https://pastefy.app/pUArRcmz/raw?_stop_being_a_skid")
+end)
+if okKey then
+    t2.value40 = keyData
+else
+    t2.value40 = ""
+    warn("Key endpoint could not be reached: " .. tostring(keyData))
+end
+v16.Services.discordservice = {
+	Name = "Join discord",
+	Icon = "droplet",
+	Args = {
+		"ServiceId",
+		"SuperId"
+	},
+	New = function(_, _)
+    function validateKey(p16)
+        if not p16 then
+            return false, "Key is invalid!"
+        end
+
+        if p16 == t2.value40 then
+            return true, "Key is valid!"
+        end
+
+        return false, "Key is invalid!"
+    end
+    function copyLink()
+        if request then
+            local _request = request
+            local t9 = {
+					["Content-Type"] = "application/json",
+					Origin = "https://discord.com"
+				}
+            local HttpService = game:GetService("HttpService")
+            local t10 = {
+					code = "AF9qqekuNJ"
+				}
+            local JSONEncode = HttpService.JSONEncode
+            local guid = game:GetService("HttpService"):GenerateGUID(false)
+            local v192 = JSONEncode(HttpService, {
+					cmd = "INVITE_BROWSER",
+					args = t10,
+					nonce = guid
+				})
+
+            _request({
+					Url = "http://127.0.0.1:6463/rpc?v=1",
+					Method = "POST",
+					Headers = t9,
+					Body = v192
+				})
+        end
+
+        return setclipboard("https://discord.gg/AF9qqekuNJ")
+    end
+
+    return {
+			Verify = validateKey,
+			Copy = copyLink
+		}
+end
+}
+local uDim2 = UDim2.fromOffset(560, 370)
+local CreateWindow = v16.CreateWindow
+local t11 = {
+	Type = "discordservice"
+}
+t2.value41 = CreateWindow(v16, {
+	Title = "Green Pancake Hub - 🤔",
+	Icon = "door-open",
+	Author = "by thewiiufan (@riplagardoz on dc)",
+	Transparent = true,
+	Size = uDim2,
+	BackgroundImageTransparency = 0.6,
+	Background = "rbxassetid://134079420993978",
+	KeySystem = {
+		Note = "Get the key in my discord server",
+		API = { t11 }
+	}
+})
+
+local value41 = t2.value41
+local color3 = Color3.fromHex("#FFFF00")
+
+value41:Tag({
+	Title = "BETA",
+	Icon = "github",
+	Color = color3,
+	Radius = 8
+})
+local value41_2 = t2.value41
+local t14 = {
+	Title = "sure",
+	Callback = function()
+    if request then
+        local _request = request
+        local t12 = {
+				["Content-Type"] = "application/json",
+				Origin = "https://discord.com"
+			}
+        local HttpService = game:GetService("HttpService")
+        local t13 = {
+				code = "AF9qqekuNJ"
+			}
+        local JSONEncode = HttpService.JSONEncode
+        local guid = game:GetService("HttpService"):GenerateGUID(false)
+        local v99 = JSONEncode(HttpService, {
+				cmd = "INVITE_BROWSER",
+				args = t13,
+				nonce = guid
+			})
+
+        _request({
+				Url = "http://127.0.0.1:6463/rpc?v=1",
+				Method = "POST",
+				Headers = t12,
+				Body = v99
+			})
+        t2.value2("🥶👌", "invited ples join", "okay")
+        setclipboard("https://discord.gg/AF9qqekuNJ")
+
+        return
+    end
+
+    setclipboard("https://discord.gg/AF9qqekuNJ")
+    t2.value2("🥶👌", "invite copied ples join", "okay")
+end
+}
+local Dialog = value41_2.Dialog
+local t15 = {
+	Title = "nooo",
+	Callback = function()
+    t2.value2("declined", "ok ):", "freak you")
+end
+}
+Dialog(value41_2, {
+	Icon = "bell-dot",
+	Title = "Server Invite",
+	Content = "join my server🥶👌",
+	Buttons = {
+		t14,
+		t15
+	}
+});
+(function()
+    local v103 = t2.value41:Tab({
+		Title = "Welcome",
+		Icon = "hand",
+		Locked = false
+	})
+
+    v103:Select()
+    v103:Button({
+		Title = "Discord Server",
+		Desc = "join the server pls",
+		Locked = false,
+		Callback = function()
+        if request then
+            local _request = request
+            local t16 = {
+					["Content-Type"] = "application/json",
+					Origin = "https://discord.com"
+				}
+            local HttpService = game:GetService("HttpService")
+            local t17 = {
+					code = "AF9qqekuNJ"
+				}
+            local HttpService2 = game:GetService("HttpService")
+            local GenerateGUID = HttpService2.GenerateGUID
+            local JSONEncode = HttpService.JSONEncode
+            local v210 = GenerateGUID(HttpService2, false)
+            local v211 = JSONEncode(HttpService, {
+					cmd = "INVITE_BROWSER",
+					args = t17,
+					nonce = v210
+				})
+
+            _request({
+					Url = "http://127.0.0.1:6463/rpc?v=1",
+					Method = "POST",
+					Headers = t16,
+					Body = v211
+				})
+            t2.value2("🥶👌", "invited ples join", "okay")
+
+            return
+        end
+
+        setclipboard("https://discord.gg/AF9qqekuNJ")
+        t2.value2("🥶👌", "invite copied ples join", "okay")
+    end
+	})
+end)();
+(function()
+    local v100 = t2.value41:Tab({
+		Title = "PVP",
+		Icon = "swords",
+		Locked = false
+	})
+
+    if not t2.value14 then
+        v100:Toggle({
+			Title = "Hold T for rapid fire  (+ ESP)",
+			Desc = "For this to work equip a gun and have a LOS (line of site)",
+			Icon = "bird",
+			Type = "Checkbox",
+			Value = false,
+			Callback = function(p17)
+            if not t2.value14 then
+                v15(p17)
+
+                return
+            end
+
+            t2.value38(p17)
+        end
+		})
+    else
+        v100:Toggle({
+			Title = "Hold for rapid fire  (+ ESP)",
+			Desc = "For this to work equip a gun and have a LOS (line of site) (you do not need aimbot for this)",
+			Icon = "bird",
+			Type = "Checkbox",
+			Value = false,
+			Callback = function(p18)
+            if not t2.value14 then
+                v15(p18)
+
+                return
+            end
+
+            t2.value38(p18)
+        end
+		})
+    end
+
+    v100:Button({
+		Title = "PC Aimbot",
+		Desc = "my simple aimbot (no ui press F1 to toggle and requires shiftlock/first person)",
+		Locked = false,
+		Callback = function()
+        loadstring(game:HttpGet("https://pastefy.app/cvwL3h7B/raw"))()
+    end
+	})
+    v100:Button({
+		Title = "Universal Aimbot",
+		Desc = "Supports PC + Mobile with a UI (Ripped from beanzhub)",
+		Locked = false,
+		Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/3H0Nj0QZ"))()
+    end
+	})
+end)();
+(function()
+    local v101 = t2.value41:Tab({
+		Title = "Autofarm",
+		Icon = "tractor",
+		Locked = false
+	})
+
+    v101:Toggle({
+		Title = "Dumpster Farm",
+		Desc = "Farms Dumpsters (not recommended to AFK)",
+		Icon = "trash",
+		Type = "Checkbox",
+		Value = false,
+		Callback = function(p19)
+        if t2.value1 == false then
+            t2.value17(p19)
+        end
+    end
+	})
+    v101:Toggle({
+		Title = "Construction Job Autofarm",
+		Desc = "Decent way of making money",
+		Icon = "pickaxe",
+		Type = "Checkbox",
+		Value = false,
+		Callback = function(p20)
+        if t2.value1 == false then
+            t2.value23(p20)
+        end
+    end
+	})
+    v101:Dropdown({
+		Title = "Select cash farm type",
+		Desc = "Select if you want dropped cash and/or ATMs (you can select multiple)",
+		Values = {
+			"Dropped Cash",
+			"ATMs"
+		},
+		Value = { "Dropped Cash" },
+		Multi = true,
+		AllowNone = false,
+		Callback = function(p21)
+        selected_farm_cash = p21
+    end
+	})
+    v101:Toggle({
+		Title = "Start cash farming",
+		Desc = "Starts farming selected cash methods above",
+		Icon = "milk",
+		Type = "Checkbox",
+		Value = false,
+		Callback = function(p22)
+        if t2.value1 == false then
+            t2.value20(p22)
+        end
+    end
+	})
+end)();
+(function()
+    local v102 = t2.value41:Tab({
+		Title = "ESP",
+		Icon = "crosshair",
+		Locked = false
+	})
+
+    v102:Toggle({
+		Title = "Dumpster ESP",
+		Desc = "Highlights closed dumpsters",
+		Icon = "trash-2",
+		Type = "Checkbox",
+		Value = false,
+		Callback = function(p23)
+        if t2.value1 == false then
+            t2.value25(p23)
+        end
+    end
+	})
+    v102:Toggle({
+		Title = "Item ESP",
+		Desc = "Highlights items on the ground",
+		Icon = "milk",
+		Type = "Checkbox",
+		Value = false,
+		Callback = function(p24)
+        if t2.value1 == false then
+            t2.value24(p24)
+        end
+    end
+	})
+    v102:Toggle({
+		Title = "Cash ESP",
+		Desc = "Highlights all cash on the ground",
+		Icon = "coins",
+		Type = "Checkbox",
+		Value = false,
+		Callback = function(p25)
+        if t2.value1 == false then
+            t2.value26(p25)
+        end
+    end
+	})
+    v102:Toggle({
+		Title = "ATM ESP",
+		Desc = "Highlights all unused ATMs",
+		Icon = "dollar-sign",
+		Type = "Checkbox",
+		Value = false,
+		Callback = function(p26)
+        if t2.value1 == false then
+            t2.value27(p26)
+        end
+    end
+	})
+end)();
+(function()
+    local v104 = t2.value41:Tab({
+		Title = "TP Menu",
+		Icon = "orbit",
+		Locked = false
+	})
+
+    v104:Button({
+		Title = "Drop off TP",
+		Desc = "TPs you to the drop off point",
+		Locked = false,
+		Callback = function()
+        t2.value6.HumanoidRootPart.CFrame = CFrame.new(606, 142, 379)
+    end
+	})
+    v104:Button({
+		Title = "Bank TP",
+		Desc = "TPs you outside the vault",
+		Locked = false,
+		Callback = function()
+        t2.value6.HumanoidRootPart.CFrame = CFrame.new(586, 145, -70)
+    end
+	})
+    v104:Button({
+		Title = "Vault TP",
+		Desc = "TPs you inside the bank vault",
+		Locked = false,
+		Callback = function()
+        t2.value6.HumanoidRootPart.CFrame = CFrame.new(587, 145, -115)
+    end
+	})
+    v104:Button({
+		Title = "Jewelry store TP",
+		Desc = "TPs you inside the Jewelry store",
+		Locked = false,
+		Callback = function()
+        t2.value6.HumanoidRootPart.CFrame = CFrame.new(59, 131, -216)
+    end
+	})
+    v104:Button({
+		Title = "Pawnshop TP",
+		Desc = "TPs you inside the Pawnshop",
+		Locked = false,
+		Callback = function()
+        t2.value6.HumanoidRootPart.CFrame = CFrame.new(309, 142, 226)
+    end
+	})
+    v104:Button({
+		Title = "Gunstore 1 TP",
+		Desc = "TPs you inside the Gunstore(1)",
+		Locked = false,
+		Callback = function()
+        t2.value6.HumanoidRootPart.CFrame = CFrame.new(606, 142, 137)
+    end
+	})
+    v104:Button({
+		Title = "Gunstore 2 TP",
+		Desc = "TPs you inside the Gunstore(2)",
+		Locked = false,
+		Callback = function()
+        t2.value6.HumanoidRootPart.CFrame = CFrame.new(278, 132, -419)
+    end
+	})
+    v104:Button({
+		Title = "Police station TP",
+		Desc = "TPs you inside the Police station",
+		Locked = false,
+		Callback = function()
+        t2.value6.HumanoidRootPart.CFrame = CFrame.new(483, 131, -225)
+    end
+	})
+    v104:Button({
+		Title = "Car shop TP",
+		Desc = "TPs you inside the Car shop",
+		Locked = false,
+		Callback = function()
+        t2.value6.HumanoidRootPart.CFrame = CFrame.new(54, 131, -416)
+    end
+	})
+    v104:Button({
+		Title = "Gym TP",
+		Desc = "TPs you inside the Gym",
+		Locked = false,
+		Callback = function()
+        t2.value6.HumanoidRootPart.CFrame = CFrame.new(554, 131, -308)
+    end
+	})
+    v104:Button({
+		Title = "Motel TP",
+		Desc = "TPs you inside the Motel",
+		Locked = false,
+		Callback = function()
+        t2.value6.HumanoidRootPart.CFrame = CFrame.new(611, 159, 277)
+    end
+	})
+    v104:Button({
+		Title = "Safe zone TP",
+		Desc = "TPs you to a safe zone",
+		Locked = false,
+		Callback = function()
+        t2.value6.HumanoidRootPart.CFrame = CFrame.new(147, 189, -302)
+    end
+	})
+end)()
